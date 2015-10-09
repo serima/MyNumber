@@ -1,0 +1,29 @@
+{
+  "name": "serima/MyNumber",
+  "description": "Japanese MyNumber Verifier",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ryo Shibayama",
+      "email": "j02521@gmail.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "4.0.*"
+  },
+  "repositories":[
+    {
+      "packagist":false
+    },
+    {
+      "type":"composer",
+      "url":"http://packagist.jp"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Serima\\MyNumber\\": "src"
+    }
+  }
+}
