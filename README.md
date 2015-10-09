@@ -1,5 +1,7 @@
 # MyNumber
 マイナンバーの正当性を検証するためのライブラリです
+[![Build Status](https://travis-ci.org/serima/MyNumber.svg?branch=master)](https://travis-ci.org/serima/MyNumber)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/serima/MyNumber/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/serima/MyNumber/?branch=master)
 
 ## Requirements
 PHP 5.3 以上
