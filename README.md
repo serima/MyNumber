@@ -7,6 +7,12 @@
 ## Requirements
 PHP 5.3 以上
 
+## Installation
+
+```
+composer require serima/mynumber
+```
+
 ## 省令
 ### 個人番号
 [行政手続における特定の個人を識別するための番号の利用等に関する法律の規定による通知カード及び個人番号カード並びに情報提供ネットワークシステムによる特定個人情報の提供等に関する省令](http://law.e-gov.go.jp/announce/H26F11001000085.html)
