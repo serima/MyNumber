@@ -5,7 +5,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/serima/MyNumber/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/serima/MyNumber/?branch=master)
 
 ## Requirements
-PHP 5.3 以上
+PHP 5.4 以上
 
 ## Installation
 
