@@ -1,9 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
+use PHPUnit\Framework\TestCase;
 use Serima\MyNumber\MyNumber;
 
-class MyNumberTest extends PHPUnit_Framework_TestCase {
-
-    public function test_checkLength()
+class MyNumberTest extends TestCase
+{
+    public function test_checkLength(): void
     {
         $actual = MyNumber::checkLength('012345689101', 12);
         $this->assertTrue($actual);
@@ -13,10 +17,9 @@ class MyNumberTest extends PHPUnit_Framework_TestCase {
 
         $actual = MyNumber::checkLength('1234567', 12);
         $this->assertFalse($actual);
-
     }
 
-    public function test_verifyPersonal()
+    public function test_verifyPersonal(): void
     {
         $actual = MyNumber::verifyPersonal(123456789010);
         $this->assertFalse($actual);
@@ -40,7 +43,7 @@ class MyNumberTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($actual);
     }
 
-    public function test_verifyPersonal_startingZero()
+    public function test_verifyPersonal_startingZero(): void
     {
         $actual = MyNumber::verifyPersonal('023456789010');
         $this->assertFalse($actual);
@@ -64,41 +67,31 @@ class MyNumberTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($actual);
     }
 
-    public function test_verifyCompany()
+    public function test_verifyCompany(): void
     {
         $actual = MyNumber::verifyCompany(1123456789010);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789011);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789012);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789013);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789014);
-        
         $this->assertTrue($actual);
         $actual = MyNumber::verifyCompany(1123456789015);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789016);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789017);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789018);
-        
         $this->assertFalse($actual);
         $actual = MyNumber::verifyCompany(1123456789019);
-        
         $this->assertFalse($actual);
     }
 
-    public function test_verifyCompany_startingZero()
+    public function test_verifyCompany_startingZero(): void
     {
         $actual = MyNumber::verifyCompany('0234567890100');
         $this->assertFalse($actual);
