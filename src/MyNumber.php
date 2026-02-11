@@ -69,12 +69,12 @@ class MyNumber
 
         $sum = 0;
         for ($i = 1; $i <= 12; $i++) {
-            $m = (int) substr($number, 12 - $i, 1);
+            $m = (int) substr($number, 13 - $i, 1);
             $n = ($i % 2 === 0) ? 2 : 1;
             $sum += $m * $n;
         }
         $mod = $sum % 9;
 
-        return ((int) substr($number, 12, 1) === 9 - $mod);
+        return ((int) substr($number, 0, 1) === 9 - $mod);
     }
 }
