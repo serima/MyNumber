@@ -1,73 +1,83 @@
-<?php namespace Serima\MyNumber;
+<?php
+
+declare(strict_types=1);
+
+namespace Serima\MyNumber;
 
 class MyNumber
 {
     /**
-     * Check the number of digits.
-     * Pass the number as string, if starting letter is beginning zero.
-     *
-     * @param integer|string $number
-     * @param integer $digit
-     * @return bool
+     * Check that the value consists only of ASCII digits and has exactly the given length.
+     * Pass the number as a string if it has leading zeros.
      */
-    public static function checkLength($number, $digit)
+    public static function checkLength(int|string $number, int $digit): bool
     {
-        if (strlen($number) !== $digit || strspn($number, '1234567890') !== $digit) {
-            return false;
-        }
-        return true;
+        $number = (string) $number;
+
+        return strlen($number) === $digit && strspn($number, '0123456789') === $digit;
     }
 
     /**
-     * Verify personal MyNumber.
-     * Pass the number as string, if starting letter is beginning zero.
+     * Verify an Individual Number (個人番号, 12 digits).
      *
-     * @param integer|string $number
-     * @return bool
-     * @link http://law.e-gov.go.jp/announce/H26F11001000085.html
+     * The number consists of an 11-digit base number followed by a check digit.
+     * With P(n) being the n-th digit of the base number counted from the right and
+     * Q(n) = n + 1 (n <= 6) or n - 5 (n >= 7), the check digit is
+     * 11 - (sum of P(n) * Q(n) mod 11), or 0 when the remainder is 0 or 1.
+     *
+     * Pass the number as a string if it has leading zeros.
+     *
+     * @link https://laws.e-gov.go.jp/document?lawid=426M60000008085 平成26年総務省令第85号 第5条
      */
-    public static function verifyPersonal($number)
+    public static function verifyPersonal(int|string $number): bool
     {
-        if (false === self::checkLength($number, 12)) {
+        $number = (string) $number;
+
+        if (!self::checkLength($number, 12)) {
             return false;
         }
 
         $sum = 0;
-        for ($i = 1; $i <= 11; $i++) {
-            $m = (int)substr($number, 11 - $i, 1);
-            $n = ($i <= 6) ? $i + 1 : $i - 5;
-            $sum += $m * $n;
+        for ($n = 1; $n <= 11; $n++) {
+            $p = (int) $number[11 - $n];
+            $q = $n <= 6 ? $n + 1 : $n - 5;
+            $sum += $p * $q;
         }
-        $mod = $sum % 11;
+        $remainder = $sum % 11;
+        $checkDigit = $remainder <= 1 ? 0 : 11 - $remainder;
 
-        if ($mod <= 1) {
-            return ((int)substr($number, 11, 1) === 0);
-        }
-        return ((int)substr($number, 11, 1) === 11 - $mod);
+        return (int) $number[11] === $checkDigit;
     }
 
     /**
-     * Verify company MyNumber.
-     * Pass the number as string, if starting letter is beginning zero.
+     * Verify a Corporate Number (法人番号, 13 digits).
      *
-     * @param integer|string $number
-     * @return bool
-     * @link http://law.e-gov.go.jp/announce/H26F14001000070.html
+     * The number consists of a check digit PREPENDED to a 12-digit base number.
+     * With P(n) being the n-th digit of the base number counted from the right and
+     * Q(n) = 1 (n odd) or 2 (n even), the check digit is
+     * 9 - (sum of P(n) * Q(n) mod 9).
+     *
+     * Pass the number as a string if you keep it in string form; integers work too
+     * since a corporate number never starts with 0 (the check digit is 1-9).
+     *
+     * @link https://laws.e-gov.go.jp/document?lawid=426M60000040070 平成26年財務省令第70号 第2条
      */
-    public static function verifyCompany($number)
+    public static function verifyCompany(int|string $number): bool
     {
-        if (false === self::checkLength($number, 13)) {
+        $number = (string) $number;
+
+        if (!self::checkLength($number, 13)) {
             return false;
         }
 
         $sum = 0;
-        for ($i = 1; $i <= 12; $i++) {
-            $m = (int)substr($number, 12 - $i, 1);
-            $n = ($i % 2 === 0) ? 2 : 1;
-            $sum += $m * $n;
+        for ($n = 1; $n <= 12; $n++) {
+            $p = (int) $number[13 - $n];
+            $q = $n % 2 === 0 ? 2 : 1;
+            $sum += $p * $q;
         }
-        $mod = $sum % 9;
+        $checkDigit = 9 - ($sum % 9);
 
-        return ((int)substr($number, 12, 1) === 9 - $mod);
+        return (int) $number[0] === $checkDigit;
     }
 }
