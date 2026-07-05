@@ -1,7 +1,15 @@
 {
   "name": "serima/mynumber",
-  "description": "Japanese MyNumber Verifier",
+  "description": "Japanese MyNumber (Individual Number / Corporate Number) verifier",
   "license": "MIT",
+  "keywords": [
+    "mynumber",
+    "my-number",
+    "individual-number",
+    "corporate-number",
+    "validation",
+    "japan"
+  ],
   "authors": [
     {
       "name": "Ryo Shibayama",
@@ -9,23 +17,25 @@
     }
   ],
   "require": {
-    "php": ">=5.3"
+    "php": ">=8.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "4.*"
+    "phpunit/phpunit": "^11.5"
   },
-  "repositories":[
-    {
-      "packagist":false
-    },
-    {
-      "type":"composer",
-      "url":"http://packagist.jp"
-    }
-  ],
   "autoload": {
     "psr-4": {
-      "Serima\\MyNumber\\": "src"
+      "Serima\\MyNumber\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Serima\\MyNumber\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "config": {
+    "sort-packages": true
   }
 }
