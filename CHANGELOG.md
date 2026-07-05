@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (2.0.0)
+## 2.0.0 (2026-07-05)
 
 ### Fixed
 
@@ -20,6 +20,6 @@
 - `composer.json` から packagist.jp のカスタムリポジトリ設定を削除
 - リンク切れとなっていた旧 e-Gov(law.e-gov.go.jp)へのリンクを laws.e-gov.go.jp に更新
 
-## 1.x
+## 0.0.2 / 0.0.1 (2015-10-09)
 
 - 初期リリース(個人番号・法人番号の検証)
